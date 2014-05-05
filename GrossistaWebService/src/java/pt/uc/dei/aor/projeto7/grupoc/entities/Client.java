@@ -36,6 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Client.findByClientEmail", query = "SELECT c FROM Client c WHERE c.clientEmail = :clientEmail"),
     @NamedQuery(name = "Client.findByClientPassword", query = "SELECT c FROM Client c WHERE c.clientPassword = :clientPassword")})
 public class Client implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -57,9 +58,9 @@ public class Client implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "client_password")
     private String clientPassword;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientclientid")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "clientclientid")
     private Collection<Order1> order1Collection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientclientid")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "clientclientid")
     private Collection<Log> logCollection;
 
     public Client() {

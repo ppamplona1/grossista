@@ -55,7 +55,7 @@ public class Order1 implements Serializable {
     @Column(name = "expectedDate")
     @Temporal(TemporalType.DATE)
     private Date expectedDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order1")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "order1")
     private Collection<OrderHasProduct> orderHasProductCollection;
     @JoinColumn(name = "Client_client_id", referencedColumnName = "client_id")
     @ManyToOne(optional = false)

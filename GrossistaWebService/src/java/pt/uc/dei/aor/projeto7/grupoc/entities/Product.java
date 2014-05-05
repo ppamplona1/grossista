@@ -47,6 +47,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price"),
     @NamedQuery(name = "Product.findByDateOfNextReposition", query = "SELECT p FROM Product p WHERE p.dateOfNextReposition = :dateOfNextReposition")})
 public class Product implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -96,7 +97,7 @@ public class Product implements Serializable {
     @Column(name = "date_of_next_reposition")
     @Temporal(TemporalType.DATE)
     private Date dateOfNextReposition;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "product")
     private Collection<OrderHasProduct> orderHasProductCollection;
     @JoinColumn(name = "Category_category_id", referencedColumnName = "category_id")
     @ManyToOne(optional = false)

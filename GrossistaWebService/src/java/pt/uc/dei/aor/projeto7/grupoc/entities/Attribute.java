@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Attribute.findByAttributeId", query = "SELECT a FROM Attribute a WHERE a.attributeId = :attributeId"),
     @NamedQuery(name = "Attribute.findByAttributeName", query = "SELECT a FROM Attribute a WHERE a.attributeName = :attributeName")})
 public class Attribute implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -45,7 +46,7 @@ public class Attribute implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "attribute_name")
     private String attributeName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "attribute")
     private Collection<ProductHasAttribute> productHasAttributeCollection;
 
     public Attribute() {
