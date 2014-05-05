@@ -16,6 +16,7 @@ import pt.uc.dei.aor.projeto7.grupoc.entities.OrderHasProduct;
  */
 @Stateless
 public class OrderHasProductFacade extends AbstractFacade<OrderHasProduct> {
+
     @PersistenceContext(unitName = "GrossistaWebServicePU")
     private EntityManager em;
 
@@ -26,6 +27,7 @@ public class OrderHasProductFacade extends AbstractFacade<OrderHasProduct> {
 
     public OrderHasProductFacade() {
         super(OrderHasProduct.class);
+
     }
 
 }
