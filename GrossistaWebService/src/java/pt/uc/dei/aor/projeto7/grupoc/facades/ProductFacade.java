@@ -18,6 +18,8 @@ import pt.uc.dei.aor.projeto7.grupoc.entities.Product;
  *
  * @author To
  */
+
+
 @Stateless
 public class ProductFacade extends AbstractFacade<Product> {
 
@@ -30,7 +32,7 @@ public class ProductFacade extends AbstractFacade<Product> {
     }
 
     public ProductFacade() {
-        super(Product.class);
+       super(Product.class);
     }
 
     public List<Product> allProductsByBrand(String marca) {
