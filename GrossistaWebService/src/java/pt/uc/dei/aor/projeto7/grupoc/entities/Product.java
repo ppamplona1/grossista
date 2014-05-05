@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pt.uc.dei.aor.projeto7.grupoc.entities;
 
 import java.io.Serializable;
@@ -45,7 +44,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Product.findByCategory", query = "SELECT p FROM Product p WHERE p.category = :category"),
     @NamedQuery(name = "Product.findByStock", query = "SELECT p FROM Product p WHERE p.stock = :stock"),
     @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price"),
-    @NamedQuery(name = "Product.findByDateOfNextReposition", query = "SELECT p FROM Product p WHERE p.dateOfNextReposition = :dateOfNextReposition")})
+    @NamedQuery(name = "Product.findByDateOfNextReposition", query = "SELECT p FROM Product p WHERE p.dateOfNextReposition = :dateOfNextReposition"),
+    @NamedQuery(name = "Product.findStockByProduct", query = "SELECT p.stock FROM Product p WHERE P = :product"),
+    @NamedQuery(name = "Product.findDateOfNextRepositionByProduct", query = "SELECT p.dateOfNextReposition FROM Product p WHERE P = :product")
+})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
