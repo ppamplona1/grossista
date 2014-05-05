@@ -33,6 +33,30 @@ public class ProductFacade extends AbstractFacade<Product> {
         super(Product.class);
     }
 
+    public List<Product> allProductsByBrand(String marca) {
+        Query query = em.createNamedQuery("Product.findByBrand");
+
+        return query.setParameter("brand", marca).getResultList();
+    }
+
+    public List<Product> allProductsByModel(String modelo) {
+        Query query = em.createNamedQuery("Product.findByModel");
+
+        return query.setParameter("model", modelo).getResultList();
+    }
+
+    public List<Product> allProductsByVersion(String versao) {
+        Query query = em.createNamedQuery("Product.findByVersion");
+
+        return query.setParameter("version", versao).getResultList();
+    }
+
+    public List<Product> allProductsByDesignation(String designacao) {
+        Query query = em.createNamedQuery("Product.findByDesignation");
+
+        return query.setParameter("designation", designacao).getResultList();
+    }
+
     public List<Product> allProductsByCategory(String categorys) {
 
         Query query = em.createNamedQuery("Product.findByCategory");
