@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pt.uc.dei.aor.projeto7.grupoc.facades;
 
 import javax.ejb.Stateless;
@@ -17,6 +16,7 @@ import pt.uc.dei.aor.projeto7.grupoc.entities.Client;
  */
 @Stateless
 public class ClientFacade extends AbstractFacade<Client> {
+
     @PersistenceContext(unitName = "GrossistaWebServicePU")
     private EntityManager em;
 

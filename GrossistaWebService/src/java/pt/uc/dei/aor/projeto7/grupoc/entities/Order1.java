@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pt.uc.dei.aor.projeto7.grupoc.entities;
 
 import java.io.Serializable;
@@ -23,7 +22,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -37,7 +35,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Order1.findAll", query = "SELECT o FROM Order1 o"),
     @NamedQuery(name = "Order1.findByOrderId", query = "SELECT o FROM Order1 o WHERE o.orderId = :orderId"),
-    @NamedQuery(name = "Order1.findByOrderName", query = "SELECT o FROM Order1 o WHERE o.orderName = :orderName"),
     @NamedQuery(name = "Order1.findByExpectedDate", query = "SELECT o FROM Order1 o WHERE o.expectedDate = :expectedDate")})
 public class Order1 implements Serializable {
 
@@ -48,10 +45,6 @@ public class Order1 implements Serializable {
     @Column(name = "order_id")
     private Integer orderId;
 
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "order_name")
-    private String orderName;
     @Column(name = "expectedDate")
     @Temporal(TemporalType.DATE)
     private Date expectedDate;
@@ -68,25 +61,12 @@ public class Order1 implements Serializable {
         this.orderId = orderId;
     }
 
-    public Order1(Integer orderId, String orderName) {
-        this.orderId = orderId;
-        this.orderName = orderName;
-    }
-
     public Integer getOrderId() {
         return orderId;
     }
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
-    }
-
-    public String getOrderName() {
-        return orderName;
-    }
-
-    public void setOrderName(String orderName) {
-        this.orderName = orderName;
     }
 
     public Date getExpectedDate() {
