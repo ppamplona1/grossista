@@ -18,8 +18,6 @@ import pt.uc.dei.aor.projeto7.grupoc.entities.Product;
  *
  * @author To
  */
-
-
 @Stateless
 public class ProductFacade extends AbstractFacade<Product> {
 
@@ -32,7 +30,7 @@ public class ProductFacade extends AbstractFacade<Product> {
     }
 
     public ProductFacade() {
-       super(Product.class);
+        super(Product.class);
     }
 
     public List<Product> allProductsByBrand(String marca) {
@@ -57,6 +55,12 @@ public class ProductFacade extends AbstractFacade<Product> {
         Query query = em.createNamedQuery("Product.findByDesignation");
 
         return query.setParameter("designation", designacao).getResultList();
+    }
+
+    public List<Product> allProductsByBrandVersionModel(String brand, String version, String model) {
+        return em.createNamedQuery("Product.findByModelVersionBrand").
+                setParameter("brand", brand).setParameter("model", model).
+                setParameter("version", version).getResultList();
     }
 
     public List<Product> allProductsByCategory(String categorys) {
@@ -115,6 +119,10 @@ public class ProductFacade extends AbstractFacade<Product> {
             //
         }
         return dateReposition;
+    }
+
+    public Product getProduct(Integer productID) {
+        return em.find(Product.class, productID);
     }
 
 }
