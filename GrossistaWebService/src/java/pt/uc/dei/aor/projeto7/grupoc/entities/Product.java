@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package pt.uc.dei.aor.projeto7.grupoc.entities;
 
 import java.io.Serializable;
@@ -28,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author User
+ * @author Pedro
  */
 @Entity
 @Table(name = "product")
@@ -48,63 +49,42 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price"),
     @NamedQuery(name = "Product.findByDateOfNextReposition", query = "SELECT p FROM Product p WHERE p.dateOfNextReposition = :dateOfNextReposition"),
     @NamedQuery(name = "Product.findStockByProduct", query = "SELECT p.stock FROM Product p WHERE P = :product"),
-    @NamedQuery(name = "Product.findDateOfNextRepositionByProduct", query = "SELECT p.dateOfNextReposition FROM Product p WHERE P = :product")
-})
+    @NamedQuery(name = "Product.findDateOfNextRepositionByProduct", query = "SELECT p.dateOfNextReposition FROM Product p WHERE P = :product")})
 public class Product implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "product_id")
     private Integer productId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "product_name")
-    private String productName;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 255)
     @Column(name = "brand")
     private String brand;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "model")
-    private String model;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "version")
-    private String version;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "description")
-    private String description;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 255)
     @Column(name = "category")
     private String category;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "stock")
-    private int stock;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "price")
-    private double price;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "date_of_next_reposition")
     @Temporal(TemporalType.DATE)
     private Date dateOfNextReposition;
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "product")
-    private Collection<OrderHasProduct> orderHasProductCollection;
+    @Size(max = 255)
+    @Column(name = "description")
+    private String description;
+    @Size(max = 255)
+    @Column(name = "model")
+    private String model;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "price")
+    private Double price;
+    @Size(max = 255)
+    @Column(name = "product_name")
+    private String productName;
+    @Column(name = "stock")
+    private Integer stock;
+    @Size(max = 255)
+    @Column(name = "version")
+    private String version;
     @JoinColumn(name = "Category_category_id", referencedColumnName = "category_id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Category categorycategoryid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private Collection<ProductHasAttribute> productHasAttributeCollection;
@@ -116,33 +96,12 @@ public class Product implements Serializable {
         this.productId = productId;
     }
 
-    public Product(Integer productId, String productName, String brand, String model, String version, String description, String category, int stock, double price, Date dateOfNextReposition) {
-        this.productId = productId;
-        this.productName = productName;
-        this.brand = brand;
-        this.model = model;
-        this.version = version;
-        this.description = description;
-        this.category = category;
-        this.stock = stock;
-        this.price = price;
-        this.dateOfNextReposition = dateOfNextReposition;
-    }
-
     public Integer getProductId() {
         return productId;
     }
 
     public void setProductId(Integer productId) {
         this.productId = productId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
     }
 
     public String getBrand() {
@@ -153,52 +112,12 @@ public class Product implements Serializable {
         this.brand = brand;
     }
 
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getCategory() {
         return category;
     }
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public Date getDateOfNextReposition() {
@@ -209,13 +128,52 @@ public class Product implements Serializable {
         this.dateOfNextReposition = dateOfNextReposition;
     }
 
-    @XmlTransient
-    public Collection<OrderHasProduct> getOrderHasProductCollection() {
-        return orderHasProductCollection;
+    public String getDescription() {
+        return description;
     }
 
-    public void setOrderHasProductCollection(Collection<OrderHasProduct> orderHasProductCollection) {
-        this.orderHasProductCollection = orderHasProductCollection;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     public Category getCategorycategoryid() {
@@ -257,7 +215,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "pt.uc.dei.aor.projeto7.grupoc.entities.Product[ productId=" + productId + " ]";
+        return "pt.uc.dei.aor.projeto7.grupoc.rest.products.Product[ productId=" + productId + " ]";
     }
-
+    
 }

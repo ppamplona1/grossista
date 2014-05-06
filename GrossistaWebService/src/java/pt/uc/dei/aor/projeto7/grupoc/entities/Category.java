@@ -9,7 +9,6 @@ package pt.uc.dei.aor.projeto7.grupoc.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author User
+ * @author Pedro
  */
 @Entity
 @Table(name = "category")
@@ -34,19 +33,16 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Category.findByCategoryId", query = "SELECT c FROM Category c WHERE c.categoryId = :categoryId"),
     @NamedQuery(name = "Category.findByName", query = "SELECT c FROM Category c WHERE c.name = :name")})
 public class Category implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "category_id")
     private Integer categoryId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @Size(max = 255)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "categorycategoryid")
+    @OneToMany(mappedBy = "categorycategoryid")
     private Collection<Product> productCollection;
 
     public Category() {
@@ -54,11 +50,6 @@ public class Category implements Serializable {
 
     public Category(Integer categoryId) {
         this.categoryId = categoryId;
-    }
-
-    public Category(Integer categoryId, String name) {
-        this.categoryId = categoryId;
-        this.name = name;
     }
 
     public Integer getCategoryId() {
@@ -108,7 +99,7 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return "pt.uc.dei.aor.projeto7.grupoc.entities.Category[ categoryId=" + categoryId + " ]";
+        return "pt.uc.dei.aor.projeto7.grupoc.rest.products.Category[ categoryId=" + categoryId + " ]";
     }
-
+    
 }

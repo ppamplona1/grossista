@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author User
+ * @author Pedro
  */
 @Entity
 @Table(name = "client")
@@ -36,7 +36,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Client.findByClientEmail", query = "SELECT c FROM Client c WHERE c.clientEmail = :clientEmail"),
     @NamedQuery(name = "Client.findByClientPassword", query = "SELECT c FROM Client c WHERE c.clientPassword = :clientPassword")})
 public class Client implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -58,9 +57,9 @@ public class Client implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "client_password")
     private String clientPassword;
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "clientclientid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientclientid")
     private Collection<Order1> order1Collection;
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "clientclientid")
+    @OneToMany(mappedBy = "clientclientid")
     private Collection<Log> logCollection;
 
     public Client() {
@@ -149,7 +148,7 @@ public class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "pt.uc.dei.aor.projeto7.grupoc.entities.Client[ clientId=" + clientId + " ]";
+        return "pt.uc.dei.aor.projeto7.grupoc.rest.products.Client[ clientId=" + clientId + " ]";
     }
-
+    
 }

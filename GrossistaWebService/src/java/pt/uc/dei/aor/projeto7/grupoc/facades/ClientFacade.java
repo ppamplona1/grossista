@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package pt.uc.dei.aor.projeto7.grupoc.facades;
 
 import javax.ejb.Stateless;
@@ -12,7 +13,7 @@ import pt.uc.dei.aor.projeto7.grupoc.entities.Client;
 
 /**
  *
- * @author To
+ * @author Pedro
  */
 @Stateless
 public class ClientFacade extends AbstractFacade<Client> {
@@ -27,5 +28,5 @@ public class ClientFacade extends AbstractFacade<Client> {
     public ClientFacade() {
         super(Client.class);
     }
-
+    
 }

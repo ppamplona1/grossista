@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package pt.uc.dei.aor.projeto7.grupoc.facades;
 
 import java.util.Date;
@@ -16,12 +17,11 @@ import pt.uc.dei.aor.projeto7.grupoc.entities.Product;
 
 /**
  *
- * @author To
+ * @author Pedro
  */
 @Stateless
 public class ProductFacade extends AbstractFacade<Product> {
-
-    @PersistenceContext(unitName = "GrossistaWebServicePU")
+     @PersistenceContext(unitName = "GrossistaWebServicePU")
     private EntityManager em;
 
     @Override
@@ -125,4 +125,5 @@ public class ProductFacade extends AbstractFacade<Product> {
         return em.find(Product.class, productID);
     }
 
+    
 }

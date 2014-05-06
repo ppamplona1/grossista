@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package pt.uc.dei.aor.projeto7.grupoc.facades;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import javax.persistence.EntityManager;
 
 /**
  *
- * @author To
+ * @author Pedro
  */
 public abstract class AbstractFacade<T> {
     private Class<T> entityClass;
@@ -59,5 +60,5 @@ public abstract class AbstractFacade<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
-
+    
 }

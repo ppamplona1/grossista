@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author User
+ * @author Pedro
  */
 @Embeddable
 public class ProductHasAttributePK implements Serializable {
@@ -77,7 +77,7 @@ public class ProductHasAttributePK implements Serializable {
 
     @Override
     public String toString() {
-        return "pt.uc.dei.aor.projeto7.grupoc.entities.ProductHasAttributePK[ productproductid=" + productproductid + ", attributeattributeid=" + attributeattributeid + " ]";
+        return "pt.uc.dei.aor.projeto7.grupoc.rest.products.ProductHasAttributePK[ productproductid=" + productproductid + ", attributeattributeid=" + attributeattributeid + " ]";
     }
-
+    
 }

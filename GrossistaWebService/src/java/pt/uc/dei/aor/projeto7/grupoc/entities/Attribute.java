@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author User
+ * @author Pedro
  */
 @Entity
 @Table(name = "attribute")
@@ -34,19 +34,16 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Attribute.findByAttributeId", query = "SELECT a FROM Attribute a WHERE a.attributeId = :attributeId"),
     @NamedQuery(name = "Attribute.findByAttributeName", query = "SELECT a FROM Attribute a WHERE a.attributeName = :attributeName")})
 public class Attribute implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "attribute_id")
     private Integer attributeId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @Size(max = 255)
     @Column(name = "attribute_name")
     private String attributeName;
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "attribute")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute")
     private Collection<ProductHasAttribute> productHasAttributeCollection;
 
     public Attribute() {
@@ -54,11 +51,6 @@ public class Attribute implements Serializable {
 
     public Attribute(Integer attributeId) {
         this.attributeId = attributeId;
-    }
-
-    public Attribute(Integer attributeId, String attributeName) {
-        this.attributeId = attributeId;
-        this.attributeName = attributeName;
     }
 
     public Integer getAttributeId() {
@@ -108,7 +100,7 @@ public class Attribute implements Serializable {
 
     @Override
     public String toString() {
-        return "pt.uc.dei.aor.projeto7.grupoc.entities.Attribute[ attributeId=" + attributeId + " ]";
+        return "pt.uc.dei.aor.projeto7.grupoc.rest.products.Attribute[ attributeId=" + attributeId + " ]";
     }
-
+    
 }

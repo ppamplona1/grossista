@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package pt.uc.dei.aor.projeto7.grupoc.facades;
 
 import javax.ejb.Stateless;
@@ -12,7 +13,7 @@ import pt.uc.dei.aor.projeto7.grupoc.entities.ProductHasAttribute;
 
 /**
  *
- * @author To
+ * @author Pedro
  */
 @Stateless
 public class ProductHasAttributeFacade extends AbstractFacade<ProductHasAttribute> {
@@ -27,5 +28,5 @@ public class ProductHasAttributeFacade extends AbstractFacade<ProductHasAttribut
     public ProductHasAttributeFacade() {
         super(ProductHasAttribute.class);
     }
-
+    
 }

@@ -15,6 +15,7 @@ import javax.ws.rs.Produces;
 import pt.uc.dei.aor.projeto7.grupoc.entities.Product;
 import pt.uc.dei.aor.projeto7.grupoc.facades.ProductFacade;
 
+
 /**
  *
  * @author User
