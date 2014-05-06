@@ -13,7 +13,7 @@ import pt.uc.dei.aor.projeto7.grupoc.entities.Client;
 
 /**
  *
- * @author Pedro
+ * @author User
  */
 @Stateless
 public class ClientFacade extends AbstractFacade<Client> {
@@ -28,5 +28,5 @@ public class ClientFacade extends AbstractFacade<Client> {
     public ClientFacade() {
         super(Client.class);
     }
-    
+
 }

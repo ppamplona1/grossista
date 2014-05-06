@@ -13,7 +13,7 @@ import pt.uc.dei.aor.projeto7.grupoc.entities.ProductHasAttribute;
 
 /**
  *
- * @author Pedro
+ * @author User
  */
 @Stateless
 public class ProductHasAttributeFacade extends AbstractFacade<ProductHasAttribute> {
@@ -28,5 +28,5 @@ public class ProductHasAttributeFacade extends AbstractFacade<ProductHasAttribut
     public ProductHasAttributeFacade() {
         super(ProductHasAttribute.class);
     }
-    
+
 }

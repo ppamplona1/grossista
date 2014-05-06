@@ -14,32 +14,24 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Pedro
+ * @author User
  */
 @Embeddable
 public class OrderHasProductPK implements Serializable {
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Product_product_id")
-    private int productproductid;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "order_order_id")
     private int orderOrderId;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "Product_product_id")
+    private int productproductid;
 
     public OrderHasProductPK() {
     }
 
-    public OrderHasProductPK(int productproductid, int orderOrderId) {
-        this.productproductid = productproductid;
+    public OrderHasProductPK(int orderOrderId, int productproductid) {
         this.orderOrderId = orderOrderId;
-    }
-
-    public int getProductproductid() {
-        return productproductid;
-    }
-
-    public void setProductproductid(int productproductid) {
         this.productproductid = productproductid;
     }
 
@@ -51,11 +43,19 @@ public class OrderHasProductPK implements Serializable {
         this.orderOrderId = orderOrderId;
     }
 
+    public int getProductproductid() {
+        return productproductid;
+    }
+
+    public void setProductproductid(int productproductid) {
+        this.productproductid = productproductid;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) productproductid;
         hash += (int) orderOrderId;
+        hash += (int) productproductid;
         return hash;
     }
 
@@ -66,10 +66,10 @@ public class OrderHasProductPK implements Serializable {
             return false;
         }
         OrderHasProductPK other = (OrderHasProductPK) object;
-        if (this.productproductid != other.productproductid) {
+        if (this.orderOrderId != other.orderOrderId) {
             return false;
         }
-        if (this.orderOrderId != other.orderOrderId) {
+        if (this.productproductid != other.productproductid) {
             return false;
         }
         return true;
@@ -77,7 +77,7 @@ public class OrderHasProductPK implements Serializable {
 
     @Override
     public String toString() {
-        return "pt.uc.dei.aor.projeto7.grupoc.rest.products.OrderHasProductPK[ productproductid=" + productproductid + ", orderOrderId=" + orderOrderId + " ]";
+        return "pt.uc.dei.aor.projeto7.grupoc.entities.OrderHasProductPK[ orderOrderId=" + orderOrderId + ", productproductid=" + productproductid + " ]";
     }
-    
+
 }

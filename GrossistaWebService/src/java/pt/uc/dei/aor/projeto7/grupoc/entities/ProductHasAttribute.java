@@ -20,29 +20,29 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Pedro
+ * @author User
  */
 @Entity
 @Table(name = "product_has_attribute")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ProductHasAttribute.findAll", query = "SELECT p FROM ProductHasAttribute p"),
-    @NamedQuery(name = "ProductHasAttribute.findByValue", query = "SELECT p FROM ProductHasAttribute p WHERE p.value = :value"),
     @NamedQuery(name = "ProductHasAttribute.findByProductproductid", query = "SELECT p FROM ProductHasAttribute p WHERE p.productHasAttributePK.productproductid = :productproductid"),
-    @NamedQuery(name = "ProductHasAttribute.findByAttributeattributeid", query = "SELECT p FROM ProductHasAttribute p WHERE p.productHasAttributePK.attributeattributeid = :attributeattributeid")})
+    @NamedQuery(name = "ProductHasAttribute.findByAttributeattributeid", query = "SELECT p FROM ProductHasAttribute p WHERE p.productHasAttributePK.attributeattributeid = :attributeattributeid"),
+    @NamedQuery(name = "ProductHasAttribute.findByValue", query = "SELECT p FROM ProductHasAttribute p WHERE p.value = :value")})
 public class ProductHasAttribute implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ProductHasAttributePK productHasAttributePK;
-    @Size(max = 255)
+    @Size(max = 45)
     @Column(name = "value")
     private String value;
-    @JoinColumn(name = "Product_product_id", referencedColumnName = "product_id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Product product;
     @JoinColumn(name = "Attribute_attribute_id", referencedColumnName = "attribute_id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Attribute attribute;
+    @JoinColumn(name = "Product_product_id", referencedColumnName = "product_id", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Product product;
 
     public ProductHasAttribute() {
     }
@@ -71,20 +71,20 @@ public class ProductHasAttribute implements Serializable {
         this.value = value;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
     public Attribute getAttribute() {
         return attribute;
     }
 
     public void setAttribute(Attribute attribute) {
         this.attribute = attribute;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
@@ -109,7 +109,7 @@ public class ProductHasAttribute implements Serializable {
 
     @Override
     public String toString() {
-        return "pt.uc.dei.aor.projeto7.grupoc.rest.products.ProductHasAttribute[ productHasAttributePK=" + productHasAttributePK + " ]";
+        return "pt.uc.dei.aor.projeto7.grupoc.entities.ProductHasAttribute[ productHasAttributePK=" + productHasAttributePK + " ]";
     }
-    
+
 }

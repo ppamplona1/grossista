@@ -17,6 +17,7 @@ import pt.uc.dei.aor.projeto7.grupoc.entities.Order1;
  */
 @Stateless
 public class Order1Facade extends AbstractFacade<Order1> {
+
     @PersistenceContext(unitName = "GrossistaWebServicePU")
     private EntityManager em;
 
@@ -28,5 +29,5 @@ public class Order1Facade extends AbstractFacade<Order1> {
     public Order1Facade() {
         super(Order1.class);
     }
-    
+
 }

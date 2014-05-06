@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Pedro
+ * @author User
  */
 @Entity
 @Table(name = "log")
@@ -39,14 +39,16 @@ public class Log implements Serializable {
     @NotNull
     @Column(name = "log_id")
     private Integer logId;
-    @Size(max = 255)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "operation_name")
     private String operationName;
-    @Size(max = 255)
+    @Size(max = 45)
     @Column(name = "serviceType")
     private String serviceType;
     @JoinColumn(name = "Client_client_id", referencedColumnName = "client_id")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Client clientclientid;
 
     public Log() {
@@ -54,6 +56,11 @@ public class Log implements Serializable {
 
     public Log(Integer logId) {
         this.logId = logId;
+    }
+
+    public Log(Integer logId, String operationName) {
+        this.logId = logId;
+        this.operationName = operationName;
     }
 
     public Integer getLogId() {
@@ -110,7 +117,7 @@ public class Log implements Serializable {
 
     @Override
     public String toString() {
-        return "pt.uc.dei.aor.projeto7.grupoc.rest.products.Log[ logId=" + logId + " ]";
+        return "pt.uc.dei.aor.projeto7.grupoc.entities.Log[ logId=" + logId + " ]";
     }
-    
+
 }

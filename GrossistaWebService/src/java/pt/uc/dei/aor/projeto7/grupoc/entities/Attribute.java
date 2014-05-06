@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Pedro
+ * @author User
  */
 @Entity
 @Table(name = "attribute")
@@ -40,7 +40,9 @@ public class Attribute implements Serializable {
     @NotNull
     @Column(name = "attribute_id")
     private Integer attributeId;
-    @Size(max = 255)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "attribute_name")
     private String attributeName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute")
@@ -51,6 +53,11 @@ public class Attribute implements Serializable {
 
     public Attribute(Integer attributeId) {
         this.attributeId = attributeId;
+    }
+
+    public Attribute(Integer attributeId, String attributeName) {
+        this.attributeId = attributeId;
+        this.attributeName = attributeName;
     }
 
     public Integer getAttributeId() {
@@ -100,7 +107,7 @@ public class Attribute implements Serializable {
 
     @Override
     public String toString() {
-        return "pt.uc.dei.aor.projeto7.grupoc.rest.products.Attribute[ attributeId=" + attributeId + " ]";
+        return "pt.uc.dei.aor.projeto7.grupoc.entities.Attribute[ attributeId=" + attributeId + " ]";
     }
-    
+
 }

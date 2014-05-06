@@ -13,7 +13,7 @@ import pt.uc.dei.aor.projeto7.grupoc.entities.Log;
 
 /**
  *
- * @author Pedro
+ * @author User
  */
 @Stateless
 public class LogFacade extends AbstractFacade<Log> {
@@ -28,5 +28,5 @@ public class LogFacade extends AbstractFacade<Log> {
     public LogFacade() {
         super(Log.class);
     }
-    
+
 }

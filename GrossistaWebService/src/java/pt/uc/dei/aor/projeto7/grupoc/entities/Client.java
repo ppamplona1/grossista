@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Pedro
+ * @author User
  */
 @Entity
 @Table(name = "client")
@@ -59,7 +59,7 @@ public class Client implements Serializable {
     private String clientPassword;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientclientid")
     private Collection<Order1> order1Collection;
-    @OneToMany(mappedBy = "clientclientid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientclientid")
     private Collection<Log> logCollection;
 
     public Client() {
@@ -148,7 +148,7 @@ public class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "pt.uc.dei.aor.projeto7.grupoc.rest.products.Client[ clientId=" + clientId + " ]";
+        return "pt.uc.dei.aor.projeto7.grupoc.entities.Client[ clientId=" + clientId + " ]";
     }
-    
+
 }

@@ -13,7 +13,7 @@ import pt.uc.dei.aor.projeto7.grupoc.entities.Attribute;
 
 /**
  *
- * @author Pedro
+ * @author User
  */
 @Stateless
 public class AttributeFacade extends AbstractFacade<Attribute> {
@@ -28,5 +28,5 @@ public class AttributeFacade extends AbstractFacade<Attribute> {
     public AttributeFacade() {
         super(Attribute.class);
     }
-    
+
 }

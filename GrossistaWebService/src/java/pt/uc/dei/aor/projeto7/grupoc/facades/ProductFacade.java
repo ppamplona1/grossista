@@ -21,7 +21,8 @@ import pt.uc.dei.aor.projeto7.grupoc.entities.Product;
  */
 @Stateless
 public class ProductFacade extends AbstractFacade<Product> {
-     @PersistenceContext(unitName = "GrossistaWebServicePU")
+
+    @PersistenceContext(unitName = "GrossistaWebServicePU")
     private EntityManager em;
 
     @Override
@@ -125,5 +126,4 @@ public class ProductFacade extends AbstractFacade<Product> {
         return em.find(Product.class, productID);
     }
 
-    
 }
