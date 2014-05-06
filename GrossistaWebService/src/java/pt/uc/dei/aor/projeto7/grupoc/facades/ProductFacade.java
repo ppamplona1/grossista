@@ -81,7 +81,7 @@ public class ProductFacade extends AbstractFacade<Product> {
 
     public Integer stockQtyByProduct(Product produto) {
 
-        Query query = em.createNamedQuery("Product.findByStock");
+        Query query = em.createNamedQuery("Product.findStockByProduct");
         query.setParameter("product", produto);
 
         Integer prod = 0;

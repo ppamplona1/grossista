@@ -6,7 +6,6 @@
 
 package pt.uc.dei.aor.projeto7.grupoc.rest.products;
 
-import com.google.gson.Gson;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -43,7 +42,7 @@ public class ProductsServiceREST {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public String getStockProduct(@PathParam("productId") String productId) {
         Integer id = Integer.parseInt(productId);
-        return new Gson().toJson(productFacade.stockQtyByProduct(productFacade.find(productId)));
+        return "<stock>" + productFacade.stockQtyByProduct(productFacade.find(id)) + "</    stock>";
     }
 
     @GET

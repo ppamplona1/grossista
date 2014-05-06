@@ -9,7 +9,6 @@ package pt.uc.dei.aor.projeto7.grupoc.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -52,49 +51,49 @@ public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+
     @NotNull
     @Column(name = "product_id")
     private Integer productId;
-    @Basic(optional = false)
+
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "product_name")
     private String productName;
-    @Basic(optional = false)
+
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "brand")
     private String brand;
-    @Basic(optional = false)
+
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "model")
     private String model;
-    @Basic(optional = false)
+
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "version")
     private String version;
-    @Basic(optional = false)
+
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "description")
     private String description;
-    @Basic(optional = false)
+
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "category")
     private String category;
-    @Basic(optional = false)
+
     @NotNull
     @Column(name = "stock")
     private int stock;
-    @Basic(optional = false)
+
     @NotNull
     @Column(name = "price")
     private double price;
-    @Basic(optional = false)
+
     @NotNull
     @Column(name = "date_of_next_reposition")
     @Temporal(TemporalType.DATE)

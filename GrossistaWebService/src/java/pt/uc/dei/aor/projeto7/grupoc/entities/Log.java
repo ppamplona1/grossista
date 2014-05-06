@@ -33,13 +33,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Log.findByOperationName", query = "SELECT l FROM Log l WHERE l.operationName = :operationName"),
     @NamedQuery(name = "Log.findByServiceType", query = "SELECT l FROM Log l WHERE l.serviceType = :serviceType")})
 public class Log implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "log_id")
     private Integer logId;
-    @Basic(optional = false)
+
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "operation_name")

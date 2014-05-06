@@ -7,7 +7,6 @@
 package pt.uc.dei.aor.projeto7.grupoc.entities;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -33,14 +32,15 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "OrderHasProduct.findByQuantity", query = "SELECT o FROM OrderHasProduct o WHERE o.quantity = :quantity"),
     @NamedQuery(name = "OrderHasProduct.findByPrice", query = "SELECT o FROM OrderHasProduct o WHERE o.price = :price")})
 public class OrderHasProduct implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected OrderHasProductPK orderHasProductPK;
-    @Basic(optional = false)
+
     @NotNull
     @Column(name = "quantity")
     private int quantity;
-    @Basic(optional = false)
+
     @NotNull
     @Column(name = "price")
     private double price;

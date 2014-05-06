@@ -40,13 +40,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Order1.findByOrderName", query = "SELECT o FROM Order1 o WHERE o.orderName = :orderName"),
     @NamedQuery(name = "Order1.findByExpectedDate", query = "SELECT o FROM Order1 o WHERE o.expectedDate = :expectedDate")})
 public class Order1 implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "order_id")
     private Integer orderId;
-    @Basic(optional = false)
+
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "order_name")

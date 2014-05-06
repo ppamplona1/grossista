@@ -36,13 +36,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Client.findByClientEmail", query = "SELECT c FROM Client c WHERE c.clientEmail = :clientEmail"),
     @NamedQuery(name = "Client.findByClientPassword", query = "SELECT c FROM Client c WHERE c.clientPassword = :clientPassword")})
 public class Client implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "client_id")
     private Integer clientId;
-    @Basic(optional = false)
+
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "client_name")
@@ -52,7 +53,7 @@ public class Client implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "client_email")
     private String clientEmail;
-    @Basic(optional = false)
+
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "client_password")
