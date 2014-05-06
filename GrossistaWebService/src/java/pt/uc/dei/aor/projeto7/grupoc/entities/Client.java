@@ -51,7 +51,7 @@ public class Client implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "client_email")
+    @Column(name = "client_email", unique = true)
     private String clientEmail;
 
     @NotNull
