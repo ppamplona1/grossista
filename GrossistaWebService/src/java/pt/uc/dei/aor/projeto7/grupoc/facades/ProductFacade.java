@@ -96,19 +96,19 @@ public class ProductFacade extends AbstractFacade<Product> {
         return prod;
     }
 
-    public boolean stockOKProduct(Product produto) {
+    public boolean stockOKProduct(Integer productId) {
 
-        if (stockQtyByProduct(produto) > 0) {
+        if (stockQtyByProduct(em.find(Product.class, productId)) > 0) {
             return true;
         } else {
             return false;
         }
     }
 
-    public Date dateOfNextRepositionByProduct(Product produto) {
+    public Date dateOfNextRepositionByProduct(Integer productId) {
 
         Query query = em.createNamedQuery("Product.findDateOfNextRepositionByProduct");
-        query.setParameter("product", produto);
+        query.setParameter("product", em.find(Product.class, productId));
 
         Date dateReposition = null;
 

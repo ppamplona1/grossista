@@ -7,8 +7,13 @@ package pt.uc.dei.aor.projeto7.grupoc.facades;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import pt.uc.dei.aor.projeto7.grupoc.entities.Client;
+import pt.uc.dei.aor.projeto7.grupoc.utilities.EncriptMD5;
+import pt.uc.dei.aor.projeto7.grupoc.exceptions.NotRegistedEmailException;
+import pt.uc.dei.aor.projeto7.grupoc.exceptions.PasswordException;
 
 /**
  *
@@ -27,6 +32,29 @@ public class ClientFacade extends AbstractFacade<Client> {
 
     public ClientFacade() {
         super(Client.class);
+    }
+
+    public Client getUserbyEmail(String email) throws NotRegistedEmailException {
+        Query q = em.createNamedQuery("Client.findByClientEmail");
+        q.setParameter("email", email);
+        try {
+            Client user = (Client) q.getSingleResult();
+            return user;
+        } catch (NoResultException e) {
+            throw new NotRegistedEmailException();
+        }
+    }
+
+    public Client searchLogged(String email, String password) throws NotRegistedEmailException, PasswordException {
+        Client usertemp = getUserbyEmail(email);
+        String passEncripted = EncriptMD5.cryptWithMD5(password);
+        if (usertemp != null && !usertemp.getClientPassword().equals(passEncripted)) {
+            throw new PasswordException();
+        } else if (usertemp == null) {
+            throw new NotRegistedEmailException();
+        } else {
+            return usertemp;
+        }
     }
 
 }
