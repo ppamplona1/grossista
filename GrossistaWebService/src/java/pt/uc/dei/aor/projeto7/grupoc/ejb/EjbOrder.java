@@ -71,13 +71,16 @@ public class EjbOrder {
         }
     }
 
+    // A encomenda e entregue ao cliente em 3 dias uteis, caso os produtos estejam em stock.
+    // Este metodo da-nos a data esperada de entrega da encomenda, caso todos os produtos encomendados estejam disponiveis.
     public GregorianCalendar getExpectedDate() {
 
-        GregorianCalendar actualDate = new GregorianCalendar();
+        GregorianCalendar todayDate = new GregorianCalendar();
         GregorianCalendar expectedDate = new GregorianCalendar();
 
-        int dayOfweek = actualDate.get(GregorianCalendar.DAY_OF_WEEK);
+        int dayOfweek = todayDate.get(GregorianCalendar.DAY_OF_WEEK);
 
+        //No GregorianCalendar domingo corresponde ao dia da semana 1, segunda ao dia 2, ..., sabado ao dia 7
         switch (dayOfweek) {
 
             case 1:

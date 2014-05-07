@@ -33,11 +33,12 @@ public class OrderHasProductFacade extends AbstractFacade<OrderHasProduct> {
 
     }
 
-    public OrderHasProduct orderHasProduct(int quantity, double priceOfUnity, Product p, Order1 o) {
+    // Rever este metodo  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public OrderHasProduct orderHasProduct(int quantity,  Product p, Order1 o) {
         OrderHasProduct ohp = new OrderHasProduct();
         ohp.setQuantity(quantity);
         //ohp.setProduct(p);
-        ohp.setPrice(priceOfUnity);
+        //ohp.setPrice(priceOfUnity);
         //ohp.setOrder1(o);
         create(ohp);  // create é um método da AbstractFacade
         // em.persist(ohp); seria outra forma de fazer o mesmo que a linha de cima

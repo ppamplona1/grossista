@@ -29,8 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "OrderHasProduct.findAll", query = "SELECT o FROM OrderHasProduct o"),
     @NamedQuery(name = "OrderHasProduct.findByOrderOrderId", query = "SELECT o FROM OrderHasProduct o WHERE o.orderHasProductPK.orderOrderId = :orderOrderId"),
     @NamedQuery(name = "OrderHasProduct.findByProductproductid", query = "SELECT o FROM OrderHasProduct o WHERE o.orderHasProductPK.productproductid = :productproductid"),
-    @NamedQuery(name = "OrderHasProduct.findByQuantity", query = "SELECT o FROM OrderHasProduct o WHERE o.quantity = :quantity"),
-    @NamedQuery(name = "OrderHasProduct.findByPrice", query = "SELECT o FROM OrderHasProduct o WHERE o.price = :price")})
+    @NamedQuery(name = "OrderHasProduct.findByQuantity", query = "SELECT o FROM OrderHasProduct o WHERE o.quantity = :quantity")})
 public class OrderHasProduct implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,9 +40,6 @@ public class OrderHasProduct implements Serializable {
     @Column(name = "quantity")
     private int quantity;
 
-    @NotNull
-    @Column(name = "price")
-    private double price;
     @JoinColumn(name = "Product_product_id", referencedColumnName = "product_id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Product product;
@@ -58,10 +54,10 @@ public class OrderHasProduct implements Serializable {
         this.orderHasProductPK = orderHasProductPK;
     }
 
-    public OrderHasProduct(OrderHasProductPK orderHasProductPK, int quantity, double price) {
+    public OrderHasProduct(OrderHasProductPK orderHasProductPK, int quantity) {
         this.orderHasProductPK = orderHasProductPK;
         this.quantity = quantity;
-        this.price = price;
+        
     }
 
     public OrderHasProduct(int orderOrderId, int productproductid) {
@@ -84,13 +80,6 @@ public class OrderHasProduct implements Serializable {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
 
     public Product getProduct() {
         return product;
