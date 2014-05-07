@@ -6,6 +6,7 @@
 
 package pt.uc.dei.aor.projeto7.grupoc.rest.clients;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,10 +20,13 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import pt.uc.dei.aor.projeto7.grupoc.entities.Client;
-import pt.uc.dei.aor.projeto7.grupoc.facades.ClientFacade;
+import pt.uc.dei.aor.projeto7.grupoc.entities.Order1;
 import pt.uc.dei.aor.projeto7.grupoc.exceptions.NotRegistedEmailException;
 import pt.uc.dei.aor.projeto7.grupoc.exceptions.PasswordException;
+import pt.uc.dei.aor.projeto7.grupoc.facades.ClientFacade;
 
 /**
  *
@@ -47,9 +51,11 @@ public class ClientsServiceREST {
     }
 
     @POST
-    @Path("login/{email}/{password}")
+    @Path("login")
     @Produces({"application/xml", "application/json"})
-    public String login(@PathParam("email") String email, @PathParam("password") String password) {
+    public String login(@Context HttpHeaders headers) {
+        String email = headers.getRequestHeaders().getFirst("email");
+        String password = headers.getRequestHeaders().getFirst("password");
         try {
             clientFacade.searchLogged(email, password);
             return "Successfully logged";
@@ -72,6 +78,7 @@ public class ClientsServiceREST {
     public void remove(@PathParam("id") Integer id) {
         clientFacade.remove(find(id));
     }
+//
 
     @GET
     @Path("{id}")
@@ -93,4 +100,10 @@ public class ClientsServiceREST {
         return clientFacade.findRange(new int[]{from, to});
     }
 
+    @GET
+    @Path("{clientId}/orders")
+    @Produces({"application/xml", "application/json"})
+    public Collection<Order1> ordersListClient(@PathParam("clientId") Integer clientId) {
+        return clientFacade.find(clientId).getOrder1Collection();
+    }
 }

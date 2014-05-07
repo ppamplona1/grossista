@@ -6,6 +6,7 @@
 
 package pt.uc.dei.aor.projeto7.grupoc.rest.orders;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -57,6 +58,13 @@ public class OrdersServiceRest {
     @Produces({"application/xml", "application/json"})
     public Order1 find(@PathParam("id") Integer id) {
         return orderfacade.find(id);
+    }
+
+    @GET
+    @Path("{id}/expecteddate")
+    @Produces({"application/xml", "application/json"})
+    public Date getExpectedDateFromEdition(@PathParam("id") Integer orderId) {
+        return orderfacade.find(orderId).getExpectedDate();
     }
 
     @GET

@@ -33,5 +33,6 @@ public class TechoApi extends Application {
         resources.add(pt.uc.dei.aor.projeto7.grupoc.rest.clients.ClientsServiceREST.class);
         resources.add(pt.uc.dei.aor.projeto7.grupoc.rest.orders.OrdersServiceRest.class);
         resources.add(pt.uc.dei.aor.projeto7.grupoc.rest.products.ProductsServiceREST.class);
+
     }
 }
