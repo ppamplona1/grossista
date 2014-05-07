@@ -5,10 +5,9 @@
  */
 package pt.uc.dei.aor.projeto7.grupoc.ejb;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.Set;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -37,19 +36,17 @@ public class EjbOrder {
     @Inject
     private ClientFacade cf;
 
-    public void createOrder(int clientId, HashMap<Product, Integer> encom) throws CreateOrderException {
+    public void createOrderAndOrderHasProduct(int clientId, HashMap<Product, Integer> encom) throws CreateOrderException {
 
         GregorianCalendar expectedDate = getExpectedDate();
 
         Order1 order = new Order1();
 
-        cf.find(clientId);
-
         order.setClientclientid(cf.find(clientId));
 
-        Date expectedDateConv = new Date(expectedDate.getTimeInMillis());
+        Date expectedDateConversion = new Date(expectedDate.getTimeInMillis());
 
-        order.setExpectedDate(expectedDateConv);
+        order.setExpectedDate(expectedDateConversion);
 
         try {
             of.create(order);
@@ -59,15 +56,26 @@ public class EjbOrder {
             throw new CreateOrderException();
         }
 
-        OrderHasProduct ohasProduct = new OrderHasProduct();
+        OrderHasProduct oHasProduct = new OrderHasProduct();
 
-        Set<Product> product = encom.keySet();
-        for (Product chave : product) {
+        Integer qty;
 
-            ohasProduct.setOrder1(order);
+        for (Product key : encom.keySet()) {
 
-//            ohasProduct.setProduct(chave.prod);
-//            ohasProduct.setProduct(product);
+            qty = encom.get(key);
+
+            oHasProduct.setQuantity(qty);
+            oHasProduct.setProduct(key);
+            oHasProduct.setOrder1(order);
+
+            try {
+                ohpf.create(oHasProduct);
+            } catch (TransactionRequiredException ex) {
+                //mensagem deverá diferente e ser melhorada
+                Logger.getLogger(EjbOrder.class.getName(), ex.getMessage());
+                throw new CreateOrderException();
+            }
+
         }
     }
 
@@ -103,4 +111,22 @@ public class EjbOrder {
         return expectedDate;
     }
 
+    public Date getExpectedOrderDate(Order1 order) {
+
+        return order.getExpectedDate();
+    }
+
+//    public void removeOrder(Order1 order) {
+//
+//        of.remove(order);
+//    }
+//
+//    //  ?????????????????????????????????????????????????????????????
+//    public void editOrder(Order1 order) {
+//
+//        of.edit(order);
+//    }
+//    public List<Order1> findAllOrders(Integer IdClient) {
+//        return of.allOrdersByClient(IdClient);
+//    }
 }
