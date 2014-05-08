@@ -70,7 +70,7 @@ public class ServiceEJB {
         }
     }
 
-    public boolean edit(@Context HttpHeaders headers) throws Exception {
+    public boolean editOrder(@Context HttpHeaders headers) throws Exception {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apikey"));
             String jsonEntity = headers.getRequestHeaders().getFirst("order1");
@@ -82,7 +82,7 @@ public class ServiceEJB {
         }
     }
 
-    public boolean remove(@Context HttpHeaders headers) throws Exception {
+    public boolean removeOrder(@Context HttpHeaders headers) throws Exception {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apikey"));
             String id = headers.getRequestHeaders().getFirst("orderId");
@@ -94,7 +94,7 @@ public class ServiceEJB {
         }
     }
 
-    public Order1 find(@Context HttpHeaders headers) throws Exception {
+    public Order1 findOrder(@Context HttpHeaders headers) throws Exception {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apikey"));
             String id = headers.getRequestHeaders().getFirst("orderId");

@@ -57,7 +57,7 @@ public class OrdersServiceRest {
     public boolean edit(@Context HttpHeaders headers) throws Exception {
         try {
 
-            return serviceEJB.edit(headers);
+            return serviceEJB.editOrder(headers);
         } catch (UserNotFoundException ex) {
             Logger.getLogger(OrdersServiceRest.class.getName()).log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.Status.UNAUTHORIZED);
@@ -70,7 +70,7 @@ public class OrdersServiceRest {
     public boolean remove(@Context HttpHeaders headers) throws Exception {
         try {
 
-            return serviceEJB.remove(headers);
+            return serviceEJB.removeOrder(headers);
         } catch (UserNotFoundException ex) {
             Logger.getLogger(OrdersServiceRest.class.getName()).log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.Status.UNAUTHORIZED);
@@ -83,7 +83,7 @@ public class OrdersServiceRest {
     public Order1 find(@Context HttpHeaders headers) throws Exception {
         try {
 
-            return serviceEJB.find(headers);
+            return serviceEJB.findOrder(headers);
         } catch (UserNotFoundException ex) {
             Logger.getLogger(OrdersServiceRest.class.getName()).log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.Status.UNAUTHORIZED);

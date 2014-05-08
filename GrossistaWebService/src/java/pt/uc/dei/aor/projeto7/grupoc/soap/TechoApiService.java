@@ -42,17 +42,17 @@ public class TechoApiService {
 
     @WebMethod(operationName = "edit")
     public boolean edit(@WebParam(name = "headers") HttpHeaders headers) throws Exception {
-        return ejbRef.edit(headers);
+        return ejbRef.editOrder(headers);
     }
 
     @WebMethod(operationName = "remove")
     public boolean remove(@WebParam(name = "headers") HttpHeaders headers) throws Exception {
-        return ejbRef.remove(headers);
+        return ejbRef.removeOrder(headers);
     }
 
     @WebMethod(operationName = "find")
     public Order1 find(@WebParam(name = "headers") HttpHeaders headers) throws Exception {
-        return ejbRef.find(headers);
+        return ejbRef.findOrder(headers);
     }
 
     @WebMethod(operationName = "getExpectedDateFromEdition")
