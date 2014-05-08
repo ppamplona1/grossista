@@ -47,9 +47,14 @@ public class Order1 implements Serializable {
     @Column(name = "order_id")
     private Integer orderId;
 
-    @Column(name = "expectedDate")
+    @Column(name = "expected_Date")
     @Temporal(TemporalType.DATE)
     private Date expectedDate;
+
+    @Column(name = "order_date")
+    @Temporal(TemporalType.DATE)
+    private Date orderDate;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order1")
     private Collection<OrderHasProduct> orderHasProductCollection;
     @JoinColumn(name = "Client_client_id", referencedColumnName = "client_id")
@@ -77,6 +82,14 @@ public class Order1 implements Serializable {
 
     public void setExpectedDate(Date expectedDate) {
         this.expectedDate = expectedDate;
+    }
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
 
     @XmlTransient

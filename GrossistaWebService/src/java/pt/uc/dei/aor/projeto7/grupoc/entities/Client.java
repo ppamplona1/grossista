@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Client.findByClientId", query = "SELECT c FROM Client c WHERE c.clientId = :clientId"),
     @NamedQuery(name = "Client.findByClientName", query = "SELECT c FROM Client c WHERE c.clientName = :clientName"),
     @NamedQuery(name = "Client.findByClientEmail", query = "SELECT c FROM Client c WHERE c.clientEmail = :clientEmail"),
-    @NamedQuery(name = "Client.findByClientPassword", query = "SELECT c FROM Client c WHERE c.clientPassword = :clientPassword")})
+    @NamedQuery(name = "Client.findByClientPassword", query = "SELECT c FROM Client c WHERE c.clientPassword = :clientPassword"),
+    @NamedQuery(name = "Client.findByApiKey", query = "SELECT c FROM Client c WHERE c.apiKEY = :apiKEY")})
 public class Client implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,10 +55,12 @@ public class Client implements Serializable {
     @Column(name = "client_email", unique = true)
     private String clientEmail;
 
+    @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "client_password")
-    private String clientPassword;
+    @Column(name = "api_KEY", unique = true)
+    private String apiKEY;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientclientid")
     private Collection<Order1> order1Collection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientclientid")
@@ -70,11 +73,11 @@ public class Client implements Serializable {
         this.clientId = clientId;
     }
 
-    public Client(Integer clientId, String clientName, String clientEmail, String clientPassword) {
+    public Client(Integer clientId, String clientName, String clientEmail, String apiKey) {
         this.clientId = clientId;
         this.clientName = clientName;
         this.clientEmail = clientEmail;
-        this.clientPassword = clientPassword;
+        this.apiKEY = apiKey;
     }
 
     public Integer getClientId() {
@@ -101,12 +104,12 @@ public class Client implements Serializable {
         this.clientEmail = clientEmail;
     }
 
-    public String getClientPassword() {
-        return clientPassword;
+    public String getApiKEY() {
+        return apiKEY;
     }
 
-    public void setClientPassword(String clientPassword) {
-        this.clientPassword = clientPassword;
+    public void setApiKEY(String apiKEY) {
+        this.apiKEY = apiKEY;
     }
 
     @XmlTransient
