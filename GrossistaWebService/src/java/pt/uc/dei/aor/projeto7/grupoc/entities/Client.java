@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pt.uc.dei.aor.projeto7.grupoc.entities;
 
 import java.io.Serializable;
@@ -34,7 +33,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Client.findByClientId", query = "SELECT c FROM Client c WHERE c.clientId = :clientId"),
     @NamedQuery(name = "Client.findByClientName", query = "SELECT c FROM Client c WHERE c.clientName = :clientName"),
     @NamedQuery(name = "Client.findByClientEmail", query = "SELECT c FROM Client c WHERE c.clientEmail = :clientEmail"),
-    @NamedQuery(name = "Client.findByClientPassword", query = "SELECT c FROM Client c WHERE c.clientPassword = :clientPassword"),
     @NamedQuery(name = "Client.findByApiKey", query = "SELECT c FROM Client c WHERE c.apiKEY = :apiKEY")})
 public class Client implements Serializable {
 
