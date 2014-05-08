@@ -6,13 +6,11 @@
 
 package pt.uc.dei.aor.projeto7.grupoc.exceptions;
 
-import javax.ws.rs.WebApplicationException;
-
 /**
  *
  * @author User
  */
-public class UserNotFoundException extends WebApplicationException {
+public class UserNotFoundException extends Exception {
 
     public UserNotFoundException() {
         super("user not found");

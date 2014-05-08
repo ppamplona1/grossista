@@ -58,7 +58,7 @@ public class ServiceEJB {
         }
     }
 
-    public boolean create(@Context HttpHeaders headers) throws Exception {
+    public boolean create(@Context HttpHeaders headers) {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apikey"));
             String jsonEntity = headers.getRequestHeaders().getFirst("order1");
@@ -70,7 +70,7 @@ public class ServiceEJB {
         }
     }
 
-    public boolean editOrder(@Context HttpHeaders headers) throws Exception {
+    public boolean editOrder(@Context HttpHeaders headers) {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apikey"));
             String jsonEntity = headers.getRequestHeaders().getFirst("order1");
@@ -82,7 +82,7 @@ public class ServiceEJB {
         }
     }
 
-    public boolean removeOrder(@Context HttpHeaders headers) throws Exception {
+    public boolean removeOrder(@Context HttpHeaders headers) {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apikey"));
             String id = headers.getRequestHeaders().getFirst("orderId");
@@ -94,7 +94,7 @@ public class ServiceEJB {
         }
     }
 
-    public Order1 findOrder(@Context HttpHeaders headers) throws Exception {
+    public Order1 findOrder(@Context HttpHeaders headers) {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apikey"));
             String id = headers.getRequestHeaders().getFirst("orderId");
@@ -105,7 +105,7 @@ public class ServiceEJB {
         }
     }
 
-    public Date getExpectedDateFromEdition(@Context HttpHeaders headers) throws Exception {
+    public Date getExpectedDateFromEdition(@Context HttpHeaders headers) {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apikey"));
             String orderId = headers.getRequestHeaders().getFirst("orderId");
@@ -116,7 +116,7 @@ public class ServiceEJB {
         }
     }
 
-    public List<Order1> findAllOrders(@Context HttpHeaders headers) throws Exception {
+    public List<Order1> findAllOrders(@Context HttpHeaders headers) {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apikey"));
             return orderfacade.findAll();
