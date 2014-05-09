@@ -2,9 +2,10 @@
 #top {
     position: relative;
     background-color:midnightblue;
+    background-image: url('background.jpg');
     color: white;
     padding: 5px;
-    margin: 0px 0px 10px 0px;
+    margin: 0px 0px 0px 0px;
 }
 
 #bottom {

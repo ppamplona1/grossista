@@ -3,35 +3,52 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 template="./template1.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="top">
 
         <p class="Three-Dee">TecnoApi</p>
+
         <table class="table_radio_rest">
             <tr>
                 <td><input  type="radio" name="rd" id="rd1" value="1"/></td>
                 <td><label class="radio_rest" for="rd1">Rest</label></td>
-
+                <td></td>
                 <td><input type="radio" name="rd" id="rd2" value="2"/></td>
                 <td><label class="radio_rest" for="rd2">Soap</label></td>
             </tr>
         </table>
-        <form>
-            <input type="text" id="pesquisar" value="Escreva aqui" onFocus="if (this.value == 'Escreva aqui')
-                            this.value = '';">
-                <input type="submit" class="solid" value="Pesquisar">
-                    </form>
 
-                    </ui:define>
-                    <ui:define name="left">
+        <p:panelGrid id="search" columns="2">
+            <h:form>
+                <row><p:inputText style="width:250px;"/></row>
+                <row><p:commandButton value="Search"/></row>
+            </h:form>
+        </p:panelGrid>
 
-                    </ui:define>
-                    <ui:define name="content">
+        <table class="table_radio_search">
+            <tr>
+                <td><input  type="radio" name="rd" id="rd1" value="1"/></td>
+                <td><label class="radio_search" for="rd1">Designaction</label></td>
 
-                    </ui:define>
+                <td><input type="radio" name="rd" id="rd2" value="2"/></td>
+                <td><label class="radio_search" for="rd2">Description</label></td>
+
+                <td><input type="radio" name="rd" id="rd2" value="2"/></td>
+                <td><label class="radio_search" for="rd2">Category</label></td>
+
+            </tr>
+        </table>
+
+    </ui:define>
+    <ui:define name="left">
 
 
-                    </ui:composition>
+    </ui:define>
+    <ui:define name="content">
+
+    </ui:define>
+
+</ui:composition>
 
