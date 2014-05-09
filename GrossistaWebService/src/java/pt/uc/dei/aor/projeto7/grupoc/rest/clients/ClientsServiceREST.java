@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
@@ -35,9 +36,9 @@ public class ClientsServiceREST {
     @GET
     @Path("{clientId}/orders")
     @Produces({"application/xml", "application/json"})
-    public Collection<Order1> ordersListClient(@Context HttpHeaders headers) {
+    public Collection<Order1> ordersListClient(@Context HttpHeaders headers, @PathParam("clientId") String clientId) {
 
-        return serviceEJB.ordersListClient(headers);
+        return serviceEJB.ordersListClient(headers, clientId);
 
     }
 }

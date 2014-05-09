@@ -30,10 +30,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "attribute")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Attribute.findAll", query = "SELECT a FROM Attribute a"),
-    @NamedQuery(name = "Attribute.findByAttributeId", query = "SELECT a FROM Attribute a WHERE a.attributeId = :attributeId"),
-    @NamedQuery(name = "Attribute.findByAttributeName", query = "SELECT a FROM Attribute a WHERE a.attributeName = :attributeName")})
+    @NamedQuery(name = Attribute.NQ_AttributefindAll, query = "SELECT a FROM Attribute a"),
+    @NamedQuery(name = Attribute.NQ_AttributefindByAttributeId, query = "SELECT a FROM Attribute a WHERE a.attributeId = :attributeId"),
+    @NamedQuery(name = Attribute.NQ_AttributefindByAttributeName, query = "SELECT a FROM Attribute a WHERE a.attributeName = :attributeName")})
 public class Attribute implements Serializable {
+
+    public static final String NQ_AttributefindAll = "Attribute.findAll";
+    public static final String NQ_AttributefindByAttributeId = "Attribute.findByAttributeId";
+    public static final String NQ_AttributefindByAttributeName = "Attribute.findByAttributeName";
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

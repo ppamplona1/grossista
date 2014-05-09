@@ -47,18 +47,18 @@ public class ServiceEJB {
     @Inject
     private ProductFacade productFacade;
 
-    public Collection<Order1> ordersListClient(@Context HttpHeaders headers) {
+    public Collection<Order1> ordersListClient(@Context HttpHeaders headers, String clientId) {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apikey"));
-            String clientid = headers.getRequestHeaders().getFirst("clientId");
-            return clientfacade.find(Integer.parseInt(clientid)).getOrder1Collection();
+
+            return clientfacade.find(Integer.parseInt(clientId)).getOrder1Collection();
         } catch (UserNotFoundException ex) {
             Logger.getLogger(ClientsServiceREST.class.getName()).log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.Status.UNAUTHORIZED);
         }
     }
 
-    public boolean create(@Context HttpHeaders headers) {
+    public boolean createOrder(@Context HttpHeaders headers) {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apikey"));
             String jsonEntity = headers.getRequestHeaders().getFirst("order1");
@@ -82,11 +82,11 @@ public class ServiceEJB {
         }
     }
 
-    public boolean removeOrder(@Context HttpHeaders headers) {
+    public boolean removeOrder(@Context HttpHeaders headers, String orderId) {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apikey"));
-            String id = headers.getRequestHeaders().getFirst("orderId");
-            orderfacade.remove(orderfacade.find(Integer.parseInt(id)));
+
+            orderfacade.remove(orderfacade.find(Integer.parseInt(orderId)));
             return true;
         } catch (UserNotFoundException ex) {
             Logger.getLogger(OrdersServiceRest.class.getName()).log(Level.SEVERE, null, ex);
@@ -94,21 +94,21 @@ public class ServiceEJB {
         }
     }
 
-    public Order1 findOrder(@Context HttpHeaders headers) {
+    public Order1 findOrder(@Context HttpHeaders headers, String orderId) {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apikey"));
-            String id = headers.getRequestHeaders().getFirst("orderId");
-            return orderfacade.find(id);
+
+            return orderfacade.find(Integer.parseInt(orderId));
         } catch (UserNotFoundException ex) {
             Logger.getLogger(OrdersServiceRest.class.getName()).log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.Status.UNAUTHORIZED);
         }
     }
 
-    public Date getExpectedDateFromEdition(@Context HttpHeaders headers) {
+    public Date getExpectedDateFromEdition(@Context HttpHeaders headers, String orderId) {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apikey"));
-            String orderId = headers.getRequestHeaders().getFirst("orderId");
+
             return orderfacade.find(Integer.parseInt(orderId)).getExpectedDate();
         } catch (UserNotFoundException ex) {
             Logger.getLogger(OrdersServiceRest.class.getName()).log(Level.SEVERE, null, ex);
@@ -137,10 +137,10 @@ public class ServiceEJB {
 
     }
 
-    public Product getProduct(@Context HttpHeaders headers) {
+    public Product getProduct(@Context HttpHeaders headers, String productId) {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apiKey"));
-            String productId = headers.getRequestHeaders().getFirst("productId");
+
             return productFacade.getProduct(Integer.parseInt(productId));
         } catch (UserNotFoundException ex) {
             Logger.getLogger(ProductsServiceREST.class.getName()).log(Level.SEVERE, null, ex);
@@ -148,10 +148,10 @@ public class ServiceEJB {
         }
     }
 
-    public int getStockProduct(@Context HttpHeaders headers) {
+    public int getStockProduct(@Context HttpHeaders headers, String productId) {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apiKey"));
-            String productId = headers.getRequestHeaders().getFirst("produtId");
+
             return productFacade.stockQtyByProduct(productFacade.
                     find(Integer.parseInt(productId)));
         } catch (UserNotFoundException ex) {
@@ -160,10 +160,10 @@ public class ServiceEJB {
         }
     }
 
-    public boolean availableProduct(@Context HttpHeaders headers) {
+    public boolean availableProduct(@Context HttpHeaders headers, String productId) {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apiKey"));
-            String productId = headers.getRequestHeaders().getFirst("produtId");
+
             return productFacade.stockOKProduct(Integer.parseInt(productId));
         } catch (UserNotFoundException ex) {
             Logger.getLogger(ProductsServiceREST.class.getName()).log(Level.SEVERE, null, ex);
@@ -171,10 +171,10 @@ public class ServiceEJB {
         }
     }
 
-    public String dateOfNextRepositionProduct(@Context HttpHeaders headers) {
+    public String dateOfNextRepositionProduct(@Context HttpHeaders headers, String productId) {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apiKey"));
-            String productId = headers.getRequestHeaders().getFirst("productId");
+
             return new SimpleDateFormat("dd-MM-yyyy").format(productFacade.
                     dateOfNextRepositionByProduct(Integer.parseInt(productId)).getTime());
         } catch (UserNotFoundException ex) {
@@ -183,30 +183,30 @@ public class ServiceEJB {
         }
     }
 
-    public List<Product> findProductsByModel(@Context HttpHeaders headers) {
+    public List<Product> findProductsByModel(@Context HttpHeaders headers, String model) {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apiKey"));
-            return productFacade.allProductsByModel(headers.getRequestHeaders().getFirst("model"));
+            return productFacade.allProductsByModel(model);
         } catch (UserNotFoundException ex) {
             Logger.getLogger(ProductsServiceREST.class.getName()).log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.Status.UNAUTHORIZED);
         }
     }
 
-    public List<Product> findProductsByBrand(@Context HttpHeaders headers) {
+    public List<Product> findProductsByBrand(@Context HttpHeaders headers, String brand) {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apiKey"));
-            return productFacade.allProductsByBrand(headers.getRequestHeaders().getFirst("brand"));
+            return productFacade.allProductsByBrand(brand);
         } catch (UserNotFoundException ex) {
             Logger.getLogger(ProductsServiceREST.class.getName()).log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.Status.UNAUTHORIZED);
         }
     }
 
-    public List<Product> findProductsByVersion(@Context HttpHeaders headers) {
+    public List<Product> findProductsByVersion(@Context HttpHeaders headers, String version) {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apiKey"));
-            return productFacade.allProductsByVersion(headers.getRequestHeaders().getFirst("version"));
+            return productFacade.allProductsByVersion(version);
         } catch (UserNotFoundException ex) {
             Logger.getLogger(ProductsServiceREST.class.getName()).log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.Status.UNAUTHORIZED);
@@ -226,10 +226,10 @@ public class ServiceEJB {
         }
     }
 
-    public List<Product> findProductsByCategory(@Context HttpHeaders headers) {
+    public List<Product> findProductsByCategory(@Context HttpHeaders headers, String category) {
         try {
             clientfacade.findClientByApiKey(headers.getRequestHeaders().getFirst("apiKey"));
-            return productFacade.allProductsByCategory(headers.getRequestHeaders().getFirst("category"));
+            return productFacade.allProductsByCategory(category);
         } catch (UserNotFoundException ex) {
             Logger.getLogger(ProductsServiceREST.class.getName()).log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.Status.UNAUTHORIZED);
