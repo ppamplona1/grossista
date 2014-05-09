@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pt.uc.dei.aor.projeto7.grupoc.soap;
 
 import java.util.Date;
@@ -32,7 +31,7 @@ import pt.uc.dei.aor.projeto7.grupoc.facades.ProductFacade;
 public class TechoApiSoapService {
 
     @EJB
-    private ProductFacade ejbRef;// Add business logic below. (Right-click in editor and choose
+    private ProductFacade ejbProduct;// Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Web Service Operation")
 
     @EJB
@@ -44,144 +43,107 @@ public class TechoApiSoapService {
     /**
      * This is a sample web service operation
      */
-    @WebMethod(operationName = "find")
-    public Product findP(@WebParam(name = "id") Object id, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
-        ejbClient.findClientByApiKey(apikey);
-        return ejbRef.find(id);
-    }
-
-    @WebMethod(operationName = "findAll")
+    @WebMethod(operationName = "findAllP")
     public List<Product> findAllP(@WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
         ejbClient.findClientByApiKey(apikey);
-        return ejbRef.findAll();
+        return ejbProduct.findAll();
     }
 
-    @WebMethod(operationName = "allProductsByBrand")
-    public List<Product> allProductsByBrand(@WebParam(name = "marca") String marca, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
+    @WebMethod(operationName = "findProductsByBrand")
+    public List<Product> findProductsByBrand(@WebParam(name = "marca") String marca, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
         ejbClient.findClientByApiKey(apikey);
-        return ejbRef.allProductsByBrand(marca);
+        return ejbProduct.allProductsByBrand(marca);
     }
 
-    @WebMethod(operationName = "allProductsByModel")
+    @WebMethod(operationName = "findProductsByModel")
 
-    public List<Product> allProductsByModel(@WebParam(name = "modelo") String modelo, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
+    public List<Product> findProductsByModel(@WebParam(name = "modelo") String modelo, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
         ejbClient.findClientByApiKey(apikey);
-        return ejbRef.allProductsByModel(modelo);
+        return ejbProduct.allProductsByModel(modelo);
     }
 
-    @WebMethod(operationName = "allProductsByVersion")
-    public List<Product> allProductsByVersion(@WebParam(name = "versao") String versao,
+    @WebMethod(operationName = "findProductsByVersion")
+    public List<Product> findProductsByVersion(@WebParam(name = "versao") String versao,
             @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
         ejbClient.findClientByApiKey(apikey);
-        return ejbRef.allProductsByVersion(versao);
+        return ejbProduct.allProductsByVersion(versao);
     }
 
-    @WebMethod(operationName = "allProductsByDesignation")
-    public List<Product> allProductsByDesignation(@WebParam(name = "designacao") String designacao, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
+//    @WebMethod(operationName = "allProductsByDesignation")
+//    public List<Product> allProductsByDesignation(@WebParam(name = "designacao") String designacao, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
+//        ejbClient.findClientByApiKey(apikey);
+//        return ejbProduct.allProductsByDesignation(designacao);
+//    }
+    @WebMethod(operationName = "findProductsByDesignation")
+    public List<Product> findProductsByDesignation(@WebParam(name = "brand") String brand, @WebParam(name = "version") String version, @WebParam(name = "model") String model, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
         ejbClient.findClientByApiKey(apikey);
-        return ejbRef.allProductsByDesignation(designacao);
+        return ejbProduct.allProductsByBrandVersionModel(brand, version, model);
     }
 
-    @WebMethod(operationName = "allProductsByBrandVersionModel")
-    public List<Product> allProductsByBrandVersionModel(@WebParam(name = "brand") String brand, @WebParam(name = "version") String version, @WebParam(name = "model") String model, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
+    @WebMethod(operationName = "findProductsByCategory")
+    public List<Product> findProductsByCategory(@WebParam(name = "categorys") String categorys, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
         ejbClient.findClientByApiKey(apikey);
-        return ejbRef.allProductsByBrandVersionModel(brand, version, model);
+        return ejbProduct.allProductsByCategory(categorys);
     }
 
-    @WebMethod(operationName = "allProductsByCategory")
-    public List<Product> allProductsByCategory(@WebParam(name = "categorys") String categorys, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
+    @WebMethod(operationName = "getStockProduct")
+    public Integer getStockProduct(@WebParam(name = "produto") Product produto, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
         ejbClient.findClientByApiKey(apikey);
-        return ejbRef.allProductsByCategory(categorys);
+        return ejbProduct.stockQtyByProduct(produto);
     }
 
-    @WebMethod(operationName = "stockQtyByProduct")
-    public Integer stockQtyByProduct(@WebParam(name = "produto") Product produto, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
+    @WebMethod(operationName = "availableProduct")
+    public boolean availableProduct(@WebParam(name = "productId") Integer productId, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
         ejbClient.findClientByApiKey(apikey);
-        return ejbRef.stockQtyByProduct(produto);
+        return ejbProduct.stockOKProduct(productId);
     }
 
-    @WebMethod(operationName = "stockOKProduct")
-    public boolean stockOKProduct(@WebParam(name = "productId") Integer productId, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
+    @WebMethod(operationName = "dateOfNextRepositionProduct")
+    public Date dateOfNextRepositionProduct(@WebParam(name = "productId") Integer productId, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
         ejbClient.findClientByApiKey(apikey);
-        return ejbRef.stockOKProduct(productId);
-    }
-
-    @WebMethod(operationName = "dateOfNextRepositionByProduct")
-    public Date dateOfNextRepositionByProduct(@WebParam(name = "productId") Integer productId, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
-        ejbClient.findClientByApiKey(apikey);
-        return ejbRef.dateOfNextRepositionByProduct(productId);
+        return ejbProduct.dateOfNextRepositionByProduct(productId);
     }
 
     @WebMethod(operationName = "getProduct")
     public Product getProduct(@WebParam(name = "productID") Integer productID, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
         ejbClient.findClientByApiKey(apikey);
-        return ejbRef.getProduct(productID);
+        return ejbProduct.getProduct(productID);
     }
 
-    @WebMethod(operationName = "create")
+    @WebMethod(operationName = "createO")
     public void createO(@WebParam(name = "entityOrder") Order1 entity, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
         ejbClient.findClientByApiKey(apikey);
         ejbOrder.create(entity);
     }
 
-    @WebMethod(operationName = "edit")
+    @WebMethod(operationName = "editO")
     public void editO(@WebParam(name = "entityOrder") Order1 entity, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
         ejbClient.findClientByApiKey(apikey);
         ejbOrder.edit(entity);
     }
 
-    @WebMethod(operationName = "remove")
+    @WebMethod(operationName = "removeO")
     public void removeO(@WebParam(name = "entityOrder") Order1 entity, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
         ejbClient.findClientByApiKey(apikey);
         ejbOrder.remove(entity);
     }
 
-    @WebMethod(operationName = "find")
+    @WebMethod(operationName = "findO")
     public Order1 findO(@WebParam(name = "id") Object id, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
         ejbClient.findClientByApiKey(apikey);
         return ejbOrder.find(id);
     }
 
-    @WebMethod(operationName = "findAll")
+    @WebMethod(operationName = "findAllO")
     public List<Order1> findAllO(@WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
         ejbClient.findClientByApiKey(apikey);
         return ejbOrder.findAll();
     }
 
-    @WebMethod(operationName = "allOrdersByClient")
+    @WebMethod(operationName = "ordersListClient")
     public List<Order1> ordersListClient(@WebParam(name = "IdClient") Integer IdClient, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
         ejbClient.findClientByApiKey(apikey);
         return ejbOrder.allOrdersByClient(IdClient);
-    }
-
-    @WebMethod(operationName = "create")
-    public void createC(@WebParam(name = "entity") Client entity, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
-        ejbClient.findClientByApiKey(apikey);
-        ejbClient.create(entity);
-    }
-
-    @WebMethod(operationName = "edit")
-    public void editC(@WebParam(name = "entity") Client entity, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
-        ejbClient.findClientByApiKey(apikey);
-        ejbClient.edit(entity);
-    }
-
-    @WebMethod(operationName = "remove")
-    public void removeC(@WebParam(name = "entity") Client entity, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
-        ejbClient.findClientByApiKey(apikey);
-        ejbClient.remove(entity);
-    }
-
-    @WebMethod(operationName = "find")
-    public Client findC(@WebParam(name = "id") Object id, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
-        ejbClient.findClientByApiKey(apikey);
-        return ejbClient.find(id);
-    }
-
-    @WebMethod(operationName = "findAll")
-    public List<Client> findAllC(@WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
-        ejbClient.findClientByApiKey(apikey);
-        return ejbClient.findAll();
     }
 
     @WebMethod(operationName = "getUserbyEmail")
