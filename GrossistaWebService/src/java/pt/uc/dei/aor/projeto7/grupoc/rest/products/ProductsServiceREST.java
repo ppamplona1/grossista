@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
@@ -39,65 +40,65 @@ public class ProductsServiceREST {
     }
 
     @GET
-    @Path("product")
+    @Path("{productId}")
     @Produces({"application/xml", "application/json"})
-    public Product getProduct(@Context HttpHeaders headers) {
+    public Product getProduct(@Context HttpHeaders headers, @PathParam("productId") String productId) {
 
-        return serviceEJB.getProduct(headers);
+        return serviceEJB.getProduct(headers, productId);
 
     }
 
     @GET
-    @Path("product/stock")
+    @Path("{productId}/stock")
     @Produces("text/plain")
-    public int getStockProduct(@Context HttpHeaders headers) {
+    public int getStockProduct(@Context HttpHeaders headers, @PathParam("productId") String productId) {
 
-        return serviceEJB.getStockProduct(headers);
+        return serviceEJB.getStockProduct(headers, productId);
 
     }
 
     @GET
-    @Path("product/available")
+    @Path("{productId}/available")
     @Produces("text/plain")
-    public boolean availableProduct(@Context HttpHeaders headers) {
+    public boolean availableProduct(@Context HttpHeaders headers, @PathParam("productId") String productId) {
 
-        return serviceEJB.availableProduct(headers);
+        return serviceEJB.availableProduct(headers, productId);
 
     }
 
     @GET
-    @Path("product/dateofnextreposition")
+    @Path("{productId}/dateofnextreposition")
     @Produces("text/plain")
-    public String dateOfNextRepositionProduct(@Context HttpHeaders headers) {
+    public String dateOfNextRepositionProduct(@Context HttpHeaders headers, @PathParam("productId") String productId) {
 
-        return serviceEJB.dateOfNextRepositionProduct(headers);
-
-    }
-
-    @GET
-    @Path("model")
-    @Produces({"application/xml", "application/json"})
-    public List<Product> findProductsByModel(@Context HttpHeaders headers) {
-
-        return serviceEJB.findProductsByModel(headers);
+        return serviceEJB.dateOfNextRepositionProduct(headers, productId);
 
     }
 
     @GET
-    @Path("brand")
+    @Path("model/{model}")
     @Produces({"application/xml", "application/json"})
-    public List<Product> findProductsByBrand(@Context HttpHeaders headers) {
+    public List<Product> findProductsByModel(@Context HttpHeaders headers, @PathParam("model") String model) {
 
-        return serviceEJB.findProductsByBrand(headers);
+        return serviceEJB.findProductsByModel(headers, model);
 
     }
 
     @GET
-    @Path("version")
+    @Path("brand/{brand}")
     @Produces({"application/xml", "application/json"})
-    public List<Product> findProductsByVersion(@Context HttpHeaders headers) {
+    public List<Product> findProductsByBrand(@Context HttpHeaders headers, @PathParam("brand") String brand) {
 
-        return serviceEJB.findProductsByVersion(headers);
+        return serviceEJB.findProductsByBrand(headers, brand);
+
+    }
+
+    @GET
+    @Path("version/{version}")
+    @Produces({"application/xml", "application/json"})
+    public List<Product> findProductsByVersion(@Context HttpHeaders headers, @PathParam("version") String version) {
+
+        return serviceEJB.findProductsByVersion(headers, version);
 
     }
 
@@ -111,11 +112,11 @@ public class ProductsServiceREST {
     }
 
     @GET
-    @Path("category")
+    @Path("category/{category}")
     @Produces({"application/xml", "application/json"})
-    public List<Product> findProductsByCategory(@Context HttpHeaders headers) {
+    public List<Product> findProductsByCategory(@Context HttpHeaders headers, @PathParam("category") String category) {
 
-        return serviceEJB.findProductsByCategory(headers);
+        return serviceEJB.findProductsByCategory(headers, category);
 
     }
 }

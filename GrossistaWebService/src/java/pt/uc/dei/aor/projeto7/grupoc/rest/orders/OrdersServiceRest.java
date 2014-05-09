@@ -15,6 +15,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
@@ -38,7 +39,7 @@ public class OrdersServiceRest {
     @Produces("text/plain")
     public boolean create(@Context HttpHeaders headers) {
 
-        return serviceEJB.create(headers);
+        return serviceEJB.createOrder(headers);
 
     }
 
@@ -52,29 +53,29 @@ public class OrdersServiceRest {
     }
 
     @DELETE
-    @Path("remove")
+    @Path("{orderId}/remove")
     @Produces("text/plain")
-    public boolean remove(@Context HttpHeaders headers) {
+    public boolean remove(@Context HttpHeaders headers, @PathParam("orderId") String orderId) {
 
-        return serviceEJB.removeOrder(headers);
-
-    }
-
-    @GET
-    @Path("find")
-    @Produces({"application/xml", "application/json"})
-    public Order1 find(@Context HttpHeaders headers) {
-
-        return serviceEJB.findOrder(headers);
+        return serviceEJB.removeOrder(headers, orderId);
 
     }
 
     @GET
-    @Path("{id}/expecteddate")
+    @Path("{orderId}/find")
     @Produces({"application/xml", "application/json"})
-    public Date getExpectedDateFromEdition(@Context HttpHeaders headers) {
+    public Order1 find(@Context HttpHeaders headers, @PathParam("orderId") String orderId) {
 
-        return serviceEJB.getExpectedDateFromEdition(headers);
+        return serviceEJB.findOrder(headers, orderId);
+
+    }
+
+    @GET
+    @Path("{orderId}/expecteddate")
+    @Produces({"application/xml", "application/json"})
+    public Date getExpectedDateFromEdition(@Context HttpHeaders headers, @PathParam("orderId") String orderId) {
+
+        return serviceEJB.getExpectedDateFromEdition(headers, orderId);
 
     }
 

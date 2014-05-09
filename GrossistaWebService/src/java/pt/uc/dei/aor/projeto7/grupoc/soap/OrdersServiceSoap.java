@@ -7,12 +7,13 @@
 package pt.uc.dei.aor.projeto7.grupoc.soap;
 
 import java.util.List;
-import javax.ejb.EJB;
-import javax.jws.Oneway;
+import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import pt.uc.dei.aor.projeto7.grupoc.entities.Order1;
+import pt.uc.dei.aor.projeto7.grupoc.exceptions.UserNotFoundException;
+import pt.uc.dei.aor.projeto7.grupoc.facades.ClientFacade;
 import pt.uc.dei.aor.projeto7.grupoc.facades.Order1Facade;
 
 /**
@@ -21,50 +22,47 @@ import pt.uc.dei.aor.projeto7.grupoc.facades.Order1Facade;
  */
 @WebService(serviceName = "OrdersServiceSoap")
 public class OrdersServiceSoap {
-    @EJB
+
+    @Inject
     private Order1Facade ejbRef;// Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Web Service Operation")
 
+    @Inject
+    private ClientFacade ejbClient;
+
     @WebMethod(operationName = "create")
-    @Oneway
-    public void create(@WebParam(name = "entity") Order1 entity) {
+    public void create(@WebParam(name = "entity") Order1 entity, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
+        ejbClient.findClientByApiKey(apikey);
         ejbRef.create(entity);
     }
 
     @WebMethod(operationName = "edit")
-    @Oneway
-    public void edit(@WebParam(name = "entity") Order1 entity) {
+    public void edit(@WebParam(name = "entity") Order1 entity, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
+        ejbClient.findClientByApiKey(apikey);
         ejbRef.edit(entity);
     }
 
     @WebMethod(operationName = "remove")
-    @Oneway
-    public void remove(@WebParam(name = "entity") Order1 entity) {
+    public void remove(@WebParam(name = "entity") Order1 entity, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
+        ejbClient.findClientByApiKey(apikey);
         ejbRef.remove(entity);
     }
 
     @WebMethod(operationName = "find")
-    public Order1 find(@WebParam(name = "id") Object id) {
+    public Order1 find(@WebParam(name = "id") Object id, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
+        ejbClient.findClientByApiKey(apikey);
         return ejbRef.find(id);
     }
 
     @WebMethod(operationName = "findAll")
-    public List<Order1> findAll() {
+    public List<Order1> findAll(@WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
+        ejbClient.findClientByApiKey(apikey);
         return ejbRef.findAll();
     }
 
-    @WebMethod(operationName = "findRange")
-    public List<Order1> findRange(@WebParam(name = "range") int[] range) {
-        return ejbRef.findRange(range);
-    }
-
-    @WebMethod(operationName = "count")
-    public int count() {
-        return ejbRef.count();
-    }
-
     @WebMethod(operationName = "allOrdersByClient")
-    public List<Order1> allOrdersByClient(@WebParam(name = "IdClient") Integer IdClient) {
+    public List<Order1> allOrdersByClient(@WebParam(name = "IdClient") Integer IdClient, @WebParam(name = "apiKey") String apikey) throws UserNotFoundException {
+        ejbClient.findClientByApiKey(apikey);
         return ejbRef.allOrdersByClient(IdClient);
     }
 
