@@ -15,7 +15,7 @@ import javax.ws.rs.core.Application;
  * @author User
  */
 @ApplicationPath("/")
-public class TechoApi extends Application {
+public class TechoApplication extends Application {
 
     @Override
     public Set<Class<?>> getClasses() {

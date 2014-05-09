@@ -33,7 +33,7 @@ public class ProductsServiceREST {
 
     @GET
     @Produces({"application/xml", "application/json"})
-    public List<Product> findAll(@Context HttpHeaders headers) throws Exception {
+    public List<Product> findAllP(@Context HttpHeaders headers) throws Exception {
 
         return serviceEJB.findAllProducts(headers);
 

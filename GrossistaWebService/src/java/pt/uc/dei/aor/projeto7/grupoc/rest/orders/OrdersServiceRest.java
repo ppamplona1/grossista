@@ -37,7 +37,7 @@ public class OrdersServiceRest {
 
     @POST
     @Produces("text/plain")
-    public boolean create(@Context HttpHeaders headers) {
+    public boolean createO(@Context HttpHeaders headers) {
 
         return serviceEJB.createOrder(headers);
 
@@ -46,7 +46,7 @@ public class OrdersServiceRest {
     @PUT
     @Path("edit")
     @Produces("text/plain")
-    public boolean edit(@Context HttpHeaders headers) {
+    public boolean editO(@Context HttpHeaders headers) {
 
         return serviceEJB.editOrder(headers);
 
@@ -55,7 +55,7 @@ public class OrdersServiceRest {
     @DELETE
     @Path("{orderId}/remove")
     @Produces("text/plain")
-    public boolean remove(@Context HttpHeaders headers, @PathParam("orderId") String orderId) {
+    public boolean removeO(@Context HttpHeaders headers, @PathParam("orderId") String orderId) {
 
         return serviceEJB.removeOrder(headers, orderId);
 
@@ -64,7 +64,7 @@ public class OrdersServiceRest {
     @GET
     @Path("{orderId}/find")
     @Produces({"application/xml", "application/json"})
-    public Order1 find(@Context HttpHeaders headers, @PathParam("orderId") String orderId) {
+    public Order1 findO(@Context HttpHeaders headers, @PathParam("orderId") String orderId) {
 
         return serviceEJB.findOrder(headers, orderId);
 
@@ -81,7 +81,7 @@ public class OrdersServiceRest {
 
     @GET
     @Produces({"application/xml", "application/json"})
-    public List<Order1> findAll(@Context HttpHeaders headers) {
+    public List<Order1> findAllO(@Context HttpHeaders headers) {
 
         return serviceEJB.findAllOrders(headers);
 
